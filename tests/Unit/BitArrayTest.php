@@ -16,21 +16,21 @@ class BitArrayTest extends TestCase
     public function test_no_bits_set_by_default()
     {
         $bitArray = new BitArray();
-        $this->assertEquals([], $bitArray->toArray());
+        $this->assertEquals([0], $bitArray->toArray());
     }
 
     public function test_set_first_bit()
     {
         $bitArray = new BitArray();
-        $bitArray->set(0);
-        $this->assertEquals([0], $bitArray->toArray());
+        $bitArray->set(1);
+        $this->assertEquals([1], $bitArray->toArray());
     }
 
     public function test_set_second_bit()
     {
         $bitArray = new BitArray();
-        $bitArray->set(1);
-        $this->assertEquals([1], $bitArray->toArray());
+        $bitArray->set(2);
+        $this->assertEquals([2], $bitArray->toArray());
     }
 
     public function test_set_last_bit_in_length()

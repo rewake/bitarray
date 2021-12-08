@@ -6,7 +6,7 @@ class BitArray
 {
     public const BIT_LENGTH = PHP_INT_SIZE * 8;
 
-    private array $container = [];
+    private array $container = [0];
     private int $data = 0;
 
     public function parse(array $keys): BitArray
@@ -88,8 +88,19 @@ class BitArray
         return (1 << $this->offset($bit)) & $this->locate($bit)->data;
     }
 
+    public function fillContainer()
+    {
+        $max = max(array_keys($this->container));
+        $current = 0;
+        while ($current < $max) {
+            $this->container[$current] ??= 0;
+            $current++;
+        }
+    }
+
     public function toArray(): array
     {
+        $this->fillContainer();
         return $this->container;
     }
 
