@@ -1,28 +1,30 @@
 <?php
 
-require_once 'BitArray.php';
+require_once 'vendor/autoload.php';
 
 $items = [
-    0 => 'xs',
+//    0 => 'xs',
 //    1 => 's',
 //    2 => 'm',
-//    3 => 'l',
-//    4 => 'xl',
+    3 => 'l',
+    4 => 'xl',
 //    62 => '2xl',
 //    63 => '2xl',
 //    64 => '2xl',
 //    65 => '2xl',
-    100 => '2xl',
+//    127 => '2xl',
 ];
 
 
 
-$bitArray = new BitArray();
+$bitArray = new \Rewake\BitArray\BitArray();
 $bitArray->parse(array_keys($items));
 
-echo $bitArray::BIT_LENGTH, PHP_EOL;
+echo $bitArray->binary();
+echo PHP_EOL;
 
-echo $bitArray->locate(128), PHP_EOL;
+//echo $bitArray->enabled(64), PHP_EOL;
+echo var_export($bitArray->enabled(0)), PHP_EOL;
 
 exit;
 
