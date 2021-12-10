@@ -20,12 +20,12 @@ class BitArray
 
     public function set(int $bit): void
     {
-        $this->locate($bit)->data |= $this->offset($bit);
+        $this->locate($bit)->data |= (1 << $this->offset($bit));
     }
 
     public function unset(int $bit): void
     {
-        $this->locate($bit)->data &= ~(1 << $this->offset($bit));
+        $this->locate($bit)->data =~ (1 << $this->offset($bit));
     }
 
     protected function row(int $bit): int

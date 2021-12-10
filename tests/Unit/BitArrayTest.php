@@ -19,18 +19,24 @@ class BitArrayTest extends TestCase
         $this->assertEquals([0], $bitArray->toArray());
     }
 
-    public function test_set_first_bit()
+    public function test_set_zeroth_bit()
     {
         $bitArray = new BitArray();
-        $bitArray->set(1);
-        $this->assertEquals([1], $bitArray->toArray());
+        $bitArray->set(0);
+        $this->assertEquals([bindec(1)], $bitArray->toArray());
     }
-
     public function test_set_second_bit()
     {
         $bitArray = new BitArray();
+        $bitArray->set(1);
+        $this->assertEquals([bindec(10)], $bitArray->toArray());
+    }
+
+    public function test_set_third_bit()
+    {
+        $bitArray = new BitArray();
         $bitArray->set(2);
-        $this->assertEquals([2], $bitArray->toArray());
+        $this->assertEquals([bindec(100)], $bitArray->toArray());
     }
 
     public function test_set_last_bit_in_length()
@@ -38,7 +44,7 @@ class BitArrayTest extends TestCase
         $bitArray = new BitArray();
         $maxBit = BitArray::BIT_LENGTH - 1;
         $bitArray->set($maxBit);
-        $this->assertEquals([$maxBit], $bitArray->toArray());
+        $this->assertEquals([1 << $maxBit], $bitArray->toArray());
     }
 
     public function test_cant_set_bit_above_length()
@@ -46,26 +52,26 @@ class BitArrayTest extends TestCase
         $bitArray = new BitArray();
         $maxBit = BitArray::BIT_LENGTH;
         $bitArray->set($maxBit);
-        $this->assertNotEquals([$maxBit], $bitArray->toArray());
+        $this->assertNotEquals([1 << $maxBit], $bitArray->toArray());
     }
 
     public function test_set_random_bit()
     {
         $bitArray = new BitArray();
-        $rand = rand(0, BitArray::BIT_LENGTH - 1);
+        $rand = rand(0, BitArray::BIT_LENGTH);
         $bitArray->set($rand);
-        $this->assertEquals([$rand], $bitArray->toArray());
+        $this->assertEquals([1 << $rand], $bitArray->toArray());
     }
 
     public function test_set_all_bits_sequentially()
     {
         $bitArray = new BitArray();
         $bit = 0;
+        $expected = 0;
         while ($bit < BitArray::BIT_LENGTH) {
-
             $bitArray->set($bit);
-            echo decbin($bit), '-', decbin($bitArray->toArray()[0]), PHP_EOL;
-//            $this->assertEquals([$bit], $bitArray->toArray());
+            $expected |= 1 << $bit;
+            $this->assertEquals([$expected], $bitArray->toArray());
             $bit++;
         }
     }
