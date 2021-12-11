@@ -14,7 +14,6 @@ class BitArray
         foreach ($keys as $key) {
             $this->set($key);
         }
-
         return $this;
     }
 
@@ -108,7 +107,6 @@ class BitArray
 
     public function binary(): string
     {
-        var_dump($this->container);
         return decbin($this->data);
     }
 

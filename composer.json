@@ -15,5 +15,8 @@
             "Rewake\\": "src/",
             "Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
