@@ -25,7 +25,12 @@ class BitArray
 
     public function unset(int $bit): void
     {
-        $this->locate($bit)->data =~ (1 << $this->offset($bit));
+        $this->locate($bit)->data = ~(1 << $this->offset($bit));
+    }
+
+    public function enabled(int $bit): bool
+    {
+        return (1 << $this->offset($bit)) & $this->locate($bit)->data;
     }
 
     protected function row(int $bit): int
@@ -60,32 +65,23 @@ class BitArray
         return $bit - ($this->row($bit) * self::BIT_LENGTH);
     }
 
-
-
-
-
+    /**
+     * Get key indexes for all set bits
+     *
+     * @return array
+     */
     public function keys(): array
     {
         $keys = [];
-
-        for ($bit = 0; $bit < $this->length(); $bit++) {
-            if ($this->enabled($bit)) {
-                array_push($keys, $bit);
-            }
+        foreach ($this->container as $row) {
+            $key = 0;
+            do {
+                ! ($row & 1) ?: $keys[] = $key;
+                if ($row == -1) break;
+                $key++;
+            } while ($row >>= 1);
         }
-
         return $keys;
-    }
-
-    public function enabled(int $bit): bool
-    {
-//        echo $this->offset($bit);
-//        echo PHP_EOL;
-//        var_dump( $this->locate($bit));
-//        echo PHP_EOL;
-
-        echo "----", PHP_EOL;
-        return (1 << $this->offset($bit)) & $this->locate($bit)->data;
     }
 
     public function fillContainer()
@@ -98,6 +94,7 @@ class BitArray
         }
     }
 
+    // TODO: work on formatting / output
     public function toArray(): array
     {
         $this->fillContainer();

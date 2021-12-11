@@ -75,4 +75,39 @@ class BitArrayTest extends TestCase
             $bit++;
         }
     }
+
+    public function test_bit_enabled()
+    {
+        $bitArray = new BitArray();
+        $bitArray->set(0);
+        $this->assertTrue($bitArray->enabled(0));
+    }
+
+    public function test_random_bit_enabled()
+    {
+        $bitArray = new BitArray();
+        $rand = rand(0, BitArray::BIT_LENGTH);
+        $bitArray->set($rand);
+        $this->assertTrue($bitArray->enabled($rand));
+    }
+
+    public function test_parse_array_data()
+    {
+        $bitArray = new BitArray();
+        $bits = [0, 1, 2];
+        $expected = 1 + 2 + 4;
+
+        $bitArray->parse($bits);
+        $this->assertEquals([$expected], $bitArray->toArray());
+    }
+
+    public function test_keys()
+    {
+        $bitArray = new BitArray();
+        $bits = [0, 1, 2, 5, 7, 8, BitArray::BIT_LENGTH - 1];
+        $bitArray->parse($bits);
+
+        $keys = $bitArray->keys();
+        $this->assertEquals($bits, $keys);
+    }
 }
