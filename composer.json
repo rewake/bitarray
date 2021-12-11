@@ -1,5 +1,6 @@
 {
     "name": "rkomatz/bitty",
+    "description": "BitArray Class",
     "authors": [
         {
             "name": "Richard Komatz",
