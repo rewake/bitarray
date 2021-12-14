@@ -4,7 +4,7 @@
 
 BitArray is a pseudo data structure intended to store option sets
 in a more efficient manner than "normal", such as a many-to-one 
-relationship in a database (multiple rows), or as an imploded, serialized, 
+relationship in a database (multiple rows), or as imploded, serialized, 
 etc. data strings
 
 By manipulating and storing options sets as an array of bits, it's possible
