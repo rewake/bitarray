@@ -8,11 +8,12 @@
         }
     ],
     "require": {
+        "php": ">=7.4",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
-            "Rewake\\": "src/",
+            "Rewake\\": "src/Rewake/",
             "Tests\\": "tests/"
         }
     },
