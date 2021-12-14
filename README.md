@@ -1,6 +1,6 @@
 # BitArray
 
-## What is this BitArray thing for?
+## What is this BitArray thing?
 
 BitArray is a pseudo data structure intended to store option sets
 in a more efficient manner than "normal", such as a many-to-one 
